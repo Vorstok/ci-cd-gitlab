@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-09 09.00 Timofeev A. create table equipment_dict
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: equipment_dict
+        - createTable:
+            tableName: equipment_dict
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_equipment_dict
+                    nullable: false
+              - column:
+                  name: type
+                  remarks: тип оборудования
+                  type: int

@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-10 09.00 Timofeev A. create table event_participants
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: event_participants
+        - createTable:
+            tableName: event_participants
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_event_participants
+                    nullable: false
+              - column:
+                  name: employee_id
+                  remarks: сотрудник
+                  type: bigint
+              - column:
+                  name: is_internal
+                  remarks: внутренний_сотрудник
+                  type: boolean
+              - column:
+                  name: participant_email
+                  remarks: почта участника
+                  type: text
+              - column:
+                  name: event_id
+                  remarks: ссылка на событие
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseColumnNames: employee_id
+            baseTableName: event_participants
+            baseTableSchemaName: management
+            constraintName: fk_event_participants_employee
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: employees
+            referencedTableSchemaName: management
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: event_id
+            baseTableName: event_participants
+            baseTableSchemaName: management
+            constraintName: fk_event_participants_event
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: calendar
+            referencedTableSchemaName: management
+            validate: true

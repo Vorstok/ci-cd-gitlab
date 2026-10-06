@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: db/changeset.2024-07-10/2024-07-10_create_table_rooms.yaml
+  - include:
+      file: db/changeset.2024-07-10/2024-07-10_create_table_calendar.yaml
+  - include:
+      file: db/changeset.2024-07-10/2024-07-10_create_table_event_participants.yaml
+  - changeSet:
+      id: 2024-07-10 09.00
+      author: Andrey Timofeev
+      changes:
+        - tagDatabase:
+            tag: "2024-07-10"

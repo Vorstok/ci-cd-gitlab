@@ -1,0 +1,56 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-09 09.00 Timofeev A. create table equipment
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: equipment
+        - createTable:
+            tableName: equipment
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_equipment
+                    nullable: false
+              - column:
+                  name: type_id
+                  remarks: тип
+                  type: bigint
+              - column:
+                  name: place_id
+                  remarks: место
+                  type: bigint
+              - column:
+                  name: serial_number
+                  remarks: код
+                  type: text
+        - addForeignKeyConstraint:
+            baseColumnNames: type_id
+            baseTableName: equipment
+            baseTableSchemaName: management
+            constraintName: fk_equipment_type
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: equipment_dict
+            referencedTableSchemaName: management
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: place_id
+            baseTableName: equipment
+            baseTableSchemaName: management
+            constraintName: fk_equipment_place
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: placement
+            referencedTableSchemaName: management
+            validate: true

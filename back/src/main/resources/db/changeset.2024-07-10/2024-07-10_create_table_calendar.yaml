@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-10 09.00 Timofeev A. create table calendar
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: calendar
+        - createTable:
+            tableName: calendar
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_calendar
+                    nullable: false
+              - column:
+                  name: event_name
+                  remarks: название
+                  type: text
+              - column:
+                  name: event_date
+                  remarks: дата проведения
+                  type: timestamp
+              - column:
+                  name: room_id
+                  remarks: переговорка
+                  type: bigint
+              - column:
+                  name: link
+                  remarks: ссылка события
+                  type: text
+              - column:
+                  name: comment
+                  remarks: дополнительная информация
+                  type: text
+        - addForeignKeyConstraint:
+            baseColumnNames: room_id
+            baseTableName: calendar
+            baseTableSchemaName: management
+            constraintName: fk_calendar_room
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: rooms
+            referencedTableSchemaName: management
+            validate: true

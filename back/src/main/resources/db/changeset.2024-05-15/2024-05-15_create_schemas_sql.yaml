@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-05-15 9.00 Timofeev A. create schema management
+      author: Andrey Timofeev
+      dbms: postgres
+  - include:
+      file: sql/create_schemas.sql
+      relativeToChangelogFile: true

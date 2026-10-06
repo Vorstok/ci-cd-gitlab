@@ -1,0 +1,15 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env / secrets (для CI-переменных локально)
+.env
+*.env.local
+
+# Логи
+*.log

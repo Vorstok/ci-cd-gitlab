@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changeset.2024-05-16/2024-05-16_create_table_employees.yaml
+  - changeSet:
+      id: 2024-05-16 09.00
+      author: Andrey Timofeev
+      changes:
+        - tagDatabase:
+            tag: "2024-05-16"
