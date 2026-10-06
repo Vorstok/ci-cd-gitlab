@@ -1,0 +1,60 @@
+.MainTable {
+  text-align: center;
+}
+
+.MainTable-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .MainTable-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.MainTable-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.MainTable-link {
+  color: #61dafb;
+}
+
+.main-button {
+  background-color: #1876D1; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+.Main-Calendar {
+  background-color: white;
+  }
+
+@keyframes MainTable-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
