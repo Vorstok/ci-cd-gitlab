@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: db/changeset.2024-05-15/2024-05-15_create_schemas_sql.yaml
+  - changeSet:
+      id: 2024-05-15 09.00
+      author: Andrey Timofeev
+      changes:
+        - tagDatabase:
+            tag: "2024-05-15"

@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-09 09.00 Timofeev A. create table projects_dict
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: projects_dict
+        - createTable:
+            tableName: projects_dict
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_projects_dict
+                    nullable: false
+              - column:
+                  name: project_name
+                  remarks: название
+                  type: text

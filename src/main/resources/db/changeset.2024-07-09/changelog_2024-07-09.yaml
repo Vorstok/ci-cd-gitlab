@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_equipment_dict.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_absence_dict.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_projects_dict.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_project_descriptions_dist.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_placement.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_absence.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_cv_intersection.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_equipment.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_notifications.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_projects.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_vacations.yaml
+  - include:
+      file: db/changeset.2024-07-09/2024-07-09_create_table_work_over.yaml
+  - changeSet:
+      id: 2024-07-09 09.00
+      author: Andrey Timofeev
+      changes:
+        - tagDatabase:
+            tag: "2024-07-09"

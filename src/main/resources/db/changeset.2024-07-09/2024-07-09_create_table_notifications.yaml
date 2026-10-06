@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-09 09.00 Timofeev A. create table notifications
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: notifications
+        - createTable:
+            tableName: notifications
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_notifications
+                    nullable: false
+              - column:
+                  name: employee_id
+                  remarks: сотрудник
+                  type: bigint
+              - column:
+                  name: start_date
+                  remarks: дата старта
+                  type: timestamp
+              - column:
+                  name: message
+                  remarks: дата окончания
+                  type: date
+              - column:
+                  name: tg
+                  remarks: отправка в тг
+                  type: boolean
+              - column:
+                  name: email
+                  remarks: отправка на почту
+                  type: boolean
+              - column:
+                  name: pachka
+                  remarks: отправка в пачку
+                  type: boolean
+        - addForeignKeyConstraint:
+            baseColumnNames: employee_id
+            baseTableName: notifications
+            baseTableSchemaName: management
+            constraintName: fk_notifications_employee
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: employees
+            referencedTableSchemaName: management
+            validate: true

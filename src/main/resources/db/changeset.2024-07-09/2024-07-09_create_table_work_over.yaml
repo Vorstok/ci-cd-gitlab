@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-09 09.00 Timofeev A. create table work_over
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: work_over
+        - createTable:
+            tableName: work_over
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_work_over
+                    nullable: false
+              - column:
+                  name: project_id
+                  remarks: проект
+                  type: bigint
+              - column:
+                  name: employee_id
+                  remarks: сотрудник
+                  type: bigint
+              - column:
+                  name: start_date
+                  remarks: дата переработки
+                  type: date
+              - column:
+                  name: hours
+                  remarks: количество часов
+                  type: double
+        - addForeignKeyConstraint:
+            baseColumnNames: project_id
+            baseTableName: projects
+            baseTableSchemaName: management
+            constraintName: fk_work_over_projects_type
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: projects_dict
+            referencedTableSchemaName: management
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: employee_id
+            baseTableName: projects
+            baseTableSchemaName: management
+            constraintName: fk_work_over_employee
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: employees
+            referencedTableSchemaName: management
+            validate: true

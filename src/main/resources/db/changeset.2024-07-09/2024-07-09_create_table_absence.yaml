@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-09 09.00 Timofeev A. create table absence
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: absence
+        - createTable:
+            tableName: absence
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_absence
+                    nullable: false
+              - column:
+                  name: type_id
+                  remarks: тип
+                  type: bigint
+              - column:
+                  name: employee_id
+                  remarks: разработчик
+                  type: bigint
+              - column:
+                  name: absence_date
+                  remarks: дата
+                  type: date
+              - column:
+                  name: hours
+                  remarks: количество часов
+                  type: double
+        - addForeignKeyConstraint:
+            baseColumnNames: employee_id
+            baseTableName: absence
+            baseTableSchemaName: management
+            constraintName: fk_absence_employee
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: employees
+            referencedTableSchemaName: management
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: type_id
+            baseTableName: absence
+            baseTableSchemaName: management
+            constraintName: fk_absence_type
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: absence_dict
+            referencedTableSchemaName: management
+            validate: true

@@ -1,0 +1,52 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2024-07-09 09.00 Timofeev A. create table cv_intersection
+      author: Andrey Timofeev
+      changes:
+        - preConditions:
+            - onFail: MARK_RAN
+            - not:
+                tableExists:
+                  schemaName: management
+                  tableName: cv_intersection
+        - createTable:
+            tableName: cv_intersection
+            schemaName: management
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: PK_cv_intersection_dict
+                    nullable: false
+              - column:
+                  name: employee_id
+                  remarks: сотрудник
+                  type: bigint
+              - column:
+                  name: description_id
+                  remarks: проект
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseColumnNames: employee_id
+            baseTableName: cv_intersection
+            baseTableSchemaName: management
+            constraintName: fk_cv_intersection_employee
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: employees
+            referencedTableSchemaName: management
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: description_id
+            baseTableName: cv_intersection
+            baseTableSchemaName: management
+            constraintName: fk_cv_intersection_description
+            deferrable: true
+            initiallyDeferred: true
+            referencedColumnNames: id
+            referencedTableName: project_descriptions_dict
+            referencedTableSchemaName: management
+            validate: true
