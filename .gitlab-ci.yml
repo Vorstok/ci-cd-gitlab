@@ -1,0 +1,11 @@
+stages:
+  - check
+
+job:front:echo-who:
+  stage: check
+  image: debian:bookworm-slim
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "front"'
+  script:
+    - echo "Коммит в ветку front"
+    - who
