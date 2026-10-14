@@ -18,5 +18,5 @@ build:front:
   image: docker:27
   script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" --password-stdin
-    - docker build -t "$CI_REGISTRY_IMAGE/front:latest" .
+    - docker build --provenance=false -t "$CI_REGISTRY_IMAGE/front:latest" .
     - docker push "$CI_REGISTRY_IMAGE/front:latest"
