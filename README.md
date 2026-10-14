@@ -9,3 +9,15 @@
 - Деплой на машине в /var/www/staging, запуск на порту 8081 (Nginx прокси).
 - Деплой в /var/www/app, с рестартом сервиса.
 - Использовать shared runners, SSH-ключ как переменные (SSH_KEY, VPS_IP, VPS_USER).
+
+```bash
+## Сборка
+docker compose up -d
+
+## получить пароль от пользователя root 
+docker exec gitlab cat /etc/gitlab/initial_root_password
+
+##Открыть в браузере
+http://localhost:8929/
+```
+
