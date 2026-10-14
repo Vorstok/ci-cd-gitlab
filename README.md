@@ -57,7 +57,7 @@ GitLab открывается по адресу http://localhost:8929/ (логи
    docker network ls
 ```
 
-3. Зарегистрируй runner, подставив токен и имя сети.
+3. Зарегистрировать runner, подставив токен и имя сети.
 
 <details open>
 <summary>Bash / Linux / macOS / Git Bash</summary>
