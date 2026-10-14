@@ -1,11 +1,22 @@
 stages:
-  - check
+  - test
+  - build
 
-job:front:echo-who:
-  stage: check
-  image: debian:bookworm-slim
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "front"'
+test:front:
+  stage: test
+  image: node:20-alpine
   script:
-    - echo "Коммит в ветку front"
-    - who
+    - npm ci
+    - npm test -- --watchAll=false --passWithNoTests --reporters=default --reporters=jest-junit
+  artifacts:
+    when: always
+    paths:
+      - junit.xml
+
+build:front:
+  stage: build
+  image: docker:27
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" --password-stdin
+    - docker build -t "$CI_REGISTRY_IMAGE/front:latest" .
+    - docker push "$CI_REGISTRY_IMAGE/front:latest"
