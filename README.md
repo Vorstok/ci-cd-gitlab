@@ -19,15 +19,14 @@ docker exec gitlab cat /etc/gitlab/initial_root_password
 
 ##Открыть в браузере
 http://localhost:8929/
-
-## Admin → CI/CD → Runners, создать instance runner, 
-## получить токен и зарегистрировать его командой
 ```
 
 <details open>
 <summary>Bash / Linux / macOS / Git Bash</summary>
 
 ```bash
+## Admin → CI/CD → Runners, создать instance runner, 
+## получить токен и зарегистрировать его командой
 docker exec -it gitlab-runner gitlab-runner register \
   --non-interactive \
   --url http://gitlab:8929 \
