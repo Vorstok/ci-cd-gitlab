@@ -15,8 +15,8 @@ services:
         external_url 'http://192.168.0.175:8929'
         gitlab_rails['gitlab_shell_ssh_port'] = 2224
         registry_external_url 'http://192.168.0.175:5050'
-        puma['worker_processes'] = 2
-        sidekiq['max_concurrency'] = 10
+        puma['worker_processes'] = 1
+        sidekiq['max_concurrency'] = 1
         prometheus_monitoring['enable'] = false
     volumes:
       - gitlab_config:/etc/gitlab
