@@ -1,0 +1,22 @@
+stages:
+  - test
+  - build
+
+test:back:
+  stage: test
+  image: maven:3.9-eclipse-temurin-17
+  script:
+    - mvn test
+  artifacts:
+    when: always
+    paths:
+      - target/surefire-reports/
+    expire_in: 1 week
+
+build:back:
+  stage: build
+  image: docker:27
+  script:
+    - echo "$CI_REGISTRY_PASSWORD" | docker login "$CI_REGISTRY" -u "$CI_REGISTRY_USER" --password-stdin
+    - docker build --provenance=false -t "$CI_REGISTRY_IMAGE/back:latest" .
+    - docker push "$CI_REGISTRY_IMAGE/back:latest"
